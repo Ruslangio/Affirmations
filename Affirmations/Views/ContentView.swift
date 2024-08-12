@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var viewModel: SettingsViewModel
+    @AppStorage("showOnboarding") private var showOnboarding = true
     
     var body: some View {
         NavigationStack {
             VStack {
-                if viewModel.isShowOnboarding {
-                    OnboardingView()
+                if showOnboarding {
+                    OnboardingView(showOnboarding: $showOnboarding)
                 } else {
                     AffirmationsView()
                 }

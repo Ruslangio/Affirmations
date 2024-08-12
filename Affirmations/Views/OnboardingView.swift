@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     @EnvironmentObject private var viewModel: SettingsViewModel
-    
+    @Binding var showOnboarding: Bool
     @State private var currentStep = 1
     
     var body: some View {
@@ -121,7 +121,7 @@ struct OnboardingView: View {
             Spacer()
             
             NextButton(isInvalid: viewModel.selectedGender == "") {
-                viewModel.isShowOnboarding = false
+                showOnboarding = false
             }
         }
         .padding()
@@ -129,6 +129,6 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView()
+    OnboardingView(showOnboarding: .constant(true))
         .environmentObject(SettingsViewModel())
 }

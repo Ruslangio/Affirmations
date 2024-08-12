@@ -24,12 +24,6 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
-    @Published var isShowOnboarding = true {
-        didSet {
-            saveIsShowOnboarding()
-        }
-    }
-    
     init() {
         loadSettins()
         categories = decodeCategories()
@@ -82,14 +76,9 @@ final class SettingsViewModel: ObservableObject {
         UserDefaults.standard.set(selectedGender, forKey: "gender")
     }
     
-    private func saveIsShowOnboarding() {
-        UserDefaults.standard.set(isShowOnboarding, forKey: "isShowOnboarding")
-    }
-    
     private func loadSettins() {
         selectedCategory = UserDefaults.standard.string(forKey: "category") ?? ""
         selectedGender = UserDefaults.standard.string(forKey: "gender") ?? ""
-        isShowOnboarding = UserDefaults.standard.bool(forKey: "isShowOnboarding")
         
         if let components = UserDefaults.standard.object(forKey: "background") as? [CGFloat] {
             let color = Color(.sRGB, red: components[0], green: components[1], blue: components[2], opacity: components[3])
